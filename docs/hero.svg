@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="500" viewBox="0 0 820 500" font-family="ui-monospace, 'SF Mono', SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace" font-size="14">
+  <defs>
+    <style>
+      .dim    { fill: #8b949e; }
+      .white  { fill: #e6edf3; }
+      .ghost  { fill: #ff87d7; font-weight: 700; }
+      .green  { fill: #3fb950; }
+      .red    { fill: #f85149; }
+      .blue   { fill: #58a6ff; font-weight: 700; }
+      .purple { fill: #d2a8ff; font-weight: 700; }
+      .yellow { fill: #e3b341; font-weight: 700; }
+      .b      { font-weight: 700; }
+    </style>
+  </defs>
+
+  <!-- window -->
+  <rect x="6" y="6" width="808" height="488" rx="12" fill="#0d1117" stroke="#30363d" stroke-width="1.5"/>
+  <!-- title bar -->
+  <rect x="6" y="6" width="808" height="38" rx="12" fill="#161b22"/>
+  <rect x="6" y="26" width="808" height="18" fill="#161b22"/>
+  <circle cx="28" cy="25" r="6" fill="#f85149"/>
+  <circle cx="48" cy="25" r="6" fill="#e3b341"/>
+  <circle cx="68" cy="25" r="6" fill="#3fb950"/>
+  <text x="410" y="30" text-anchor="middle" class="dim">ghostwriter — review</text>
+
+  <!-- header -->
+  <!-- vector ghost mark (renders everywhere, no emoji font needed) -->
+  <g>
+    <path d="M22,73 a8,8 0 0 1 16,0 v7 l-2.67,2 l-2.67,-2 l-2.67,2 l-2.67,-2 l-2.67,2 l-2.67,-2 V73 z" fill="#ff87d7"/>
+    <circle cx="27.5" cy="72.5" r="1.6" fill="#0d1117"/>
+    <circle cx="33.5" cy="72.5" r="1.6" fill="#0d1117"/>
+  </g>
+  <text y="74">
+    <tspan x="46" class="ghost">ghostwriter</tspan>
+    <tspan dx="14" class="dim">review of</tspan>
+    <tspan dx="6" class="white b">payments-api</tspan>
+  </text>
+  <text y="98">
+    <tspan x="22" class="green b">✓ 2 accept</tspan>
+    <tspan dx="16" class="red b">✗ 1 reject</tspan>
+    <tspan dx="16" class="dim">· 1 pending</tspan>
+    <tspan dx="16" class="dim">· 4 files · +43/−6 · anthropic</tspan>
+  </text>
+
+  <!-- intent list -->
+  <text y="134"><tspan x="26" class="green">✓</tspan><tspan x="52" class="dim">1</tspan><tspan x="78" class="green b">FEATURE</tspan><tspan x="168" class="white">Add exponential-backoff retries to the payments client</tspan></text>
+  <text y="158"><tspan x="26" class="green">✓</tspan><tspan x="52" class="dim">2</tspan><tspan x="78" class="purple">TEST</tspan><tspan x="168" class="white">Cover the new retry behavior</tspan></text>
+  <text y="182"><tspan x="26" class="red">✗</tspan><tspan x="52" class="dim">3</tspan><tspan x="78" class="yellow">DEPS</tspan><tspan x="168" class="white">Bump Stripe SDK and add cenkalti/backoff</tspan></text>
+
+  <!-- selected row -->
+  <rect x="14" y="190" width="792" height="26" rx="5" fill="#1f2530"/>
+  <text y="208"><tspan x="14" class="ghost b">▌</tspan><tspan x="26" class="dim">·</tspan><tspan x="52" class="dim">4</tspan><tspan x="78" class="dim b">OTHER</tspan><tspan x="168" class="white">Add idempotency-key migration</tspan><tspan dx="10" class="red b">⚠</tspan></text>
+
+  <!-- divider -->
+  <text x="22" y="238" class="dim">────────────────────────────────────────────────────────────────────────</text>
+
+  <!-- detail pane -->
+  <text y="262"><tspan x="22" class="white b">Add idempotency-key migration</tspan><tspan dx="12" class="dim">+2/−0</tspan></text>
+  <text y="286"><tspan x="22" class="red b">⚠ migration</tspan><tspan dx="8" class="dim">— Database migration; review before it runs against real data.</tspan></text>
+
+  <text y="320"><tspan x="22" class="blue">▸ db/migrations/008_add_idempotency_key.sql</tspan></text>
+  <text y="344"><tspan x="38" class="green">+ ALTER TABLE charges ADD COLUMN idempotency_key TEXT;</tspan></text>
+  <text y="368"><tspan x="38" class="green">+ CREATE UNIQUE INDEX idx_charges_idem ON charges(idempotency_key);</tspan></text>
+
+  <!-- callout -->
+  <text y="408"><tspan x="22" class="dim">Press</tspan><tspan dx="6" class="red b">r</tspan><tspan dx="6" class="dim">to reject this migration and</tspan><tspan dx="6" class="white b">q</tspan><tspan dx="6" class="dim">to finish — ghostwriter reverts just</tspan></text>
+  <text y="428"><tspan x="22" class="dim">that change from your working tree, keeping everything you accepted.</tspan></text>
+
+  <!-- footer key hints -->
+  <rect x="6" y="452" width="808" height="42" fill="#161b22"/>
+  <rect x="6" y="452" width="808" height="30" fill="#161b22"/>
+  <text x="22" y="478" class="dim">↑/↓ move  ·  a accept  ·  r reject  ·  space cycle  ·  A/R all  ·  J/K scroll  ·  q finish  ·  esc cancel</text>
+</svg>
