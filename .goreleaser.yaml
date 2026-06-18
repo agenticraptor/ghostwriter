@@ -1,0 +1,93 @@
+version: 2
+
+project_name: ghostwriter
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: ghostwriter
+    main: ./cmd/ghostwriter
+    binary: ghostwriter
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - amd64
+      - arm64
+    ignore:
+      - goos: windows
+        goarch: arm64
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w
+      - -X github.com/agenticraptor/ghostwriter/internal/buildinfo.Version={{.Version}}
+      - -X github.com/agenticraptor/ghostwriter/internal/buildinfo.Commit={{.ShortCommit}}
+      - -X github.com/agenticraptor/ghostwriter/internal/buildinfo.Date={{.Date}}
+
+archives:
+  - id: default
+    name_template: >-
+      {{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}
+    formats: [tar.gz]
+    format_overrides:
+      - goos: windows
+        formats: [zip]
+
+checksum:
+  name_template: "checksums.txt"
+
+snapshot:
+  version_template: "{{ incpatch .Version }}-next"
+
+changelog:
+  sort: asc
+  use: github
+  groups:
+    - title: Features
+      regexp: '^.*?feat(\(.+\))??!?:.+$'
+      order: 0
+    - title: Bug fixes
+      regexp: '^.*?fix(\(.+\))??!?:.+$'
+      order: 1
+    - title: Others
+      order: 999
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+      - "^chore:"
+      - "merge conflict"
+      - Merge pull request
+      - Merge branch
+
+# Homebrew publishing is disabled by default so the first release succeeds
+# without extra setup. To enable `brew install agenticraptor/tap/ghostwriter`:
+#   1. Create a public repo: github.com/agenticraptor/homebrew-tap
+#   2. Add a HOMEBREW_TAP_GITHUB_TOKEN secret (a PAT with `repo` scope)
+#   3. Uncomment the line in .github/workflows/release.yml and the block below
+# brews:
+#   - name: ghostwriter
+#     repository:
+#       owner: agenticraptor
+#       name: homebrew-tap
+#     homepage: "https://github.com/agenticraptor/ghostwriter"
+#     description: "See what your AI agent changed, as a story, before you accept it."
+#     license: "MIT"
+#     test: |
+#       system "#{bin}/ghostwriter version"
+#     commit_author:
+#       name: goreleaser-bot
+#       email: bot@ghostwriter.dev
+
+release:
+  github:
+    owner: agenticraptor
+    name: ghostwriter
+  prerelease: auto
+  draft: false

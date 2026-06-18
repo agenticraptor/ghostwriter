@@ -1,0 +1,30 @@
+# Binaries
+/ghostwriter
+/dist/
+/bin/
+*.exe
+*.out
+
+# Test & coverage
+coverage.out
+coverage.html
+*.test
+
+# Editor / OS cruft
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Vendored dependencies (builds use go.sum + the module proxy instead)
+/vendor/
+
+# Local env
+.env
+.env.local
+
+# Demo capture
+docs/demo.gif.tmp
+
+# Local publish helper (not part of the published repo)
+/push.sh
