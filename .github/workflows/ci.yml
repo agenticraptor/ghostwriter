@@ -55,7 +55,7 @@ jobs:
       - name: go vet
         run: go vet ./...
       - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6
+        uses: golangci/golangci-lint-action@v9
         with:
           # Pin to v1.x: this repo's .golangci.yml uses the v1 config schema.
           version: v1.64.8
