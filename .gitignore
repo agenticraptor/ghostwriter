@@ -28,3 +28,6 @@ docs/demo.gif.tmp
 
 # Local publish helper (not part of the published repo)
 /push.sh
+
+# Shell scripts (local helpers, not part of the published repo)
+/*.sh
